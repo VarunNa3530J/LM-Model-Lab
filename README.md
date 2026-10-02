@@ -15,6 +15,10 @@
   <b>A reproducible, leak-free machine learning benchmark evaluating multiple regression architectures against a naive baseline on California census records, backed by strict preprocessor encapsulation, deterministic validation, and an interactive Streamlit application.</b>
 </p>
 
+<p align="center">
+  <img src="assets/img/dashboard_preview.png" alt="ML Model Lab Dashboard Preview" width="900" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);" />
+</p>
+
 [Overview](#-overview--problem-statement) •
 [Features](#-key-features) •
 [Tech Stack](#-tech-stack) •
@@ -129,6 +133,11 @@ The following results reflect the empirical run executed with `seed=42` ($N = 20
 - **Top Performer**: **Random Forest** achieved the lowest CV RMSE ($0.5097$) and lowest Test RMSE ($0.5042$), delivering a **$55.96\%$ error reduction** relative to baseline.
 - **Variance Explained**: Random Forest captures **$80.60\%$** of the variance in test property values ($R^2 = 0.8060$), substantially outperforming Linear Regression ($57.58\%$).
 - **Generalization Consistency**: The close alignment between 5-Fold CV RMSE ($0.5097$) and Test RMSE ($0.5042$) demonstrates that the pipeline generalizes well without severe overfitting.
+
+<div align="center">
+  <img src="assets/img/model_comparison.png" alt="Model Comparison Benchmark" width="800" style="border-radius: 8px;"/>
+  <p><i>Figure 1: Benchmark Error Comparison (5-Fold CV RMSE & Test RMSE across evaluated models).</i></p>
+</div>
 
 ---
 
@@ -321,27 +330,34 @@ Running `python -m mlmodellab.train` multiple times yields identical metrics for
 
 ## 📊 Model Diagnostics & Results Interpretation
 
-The training script generates high-resolution diagnostic charts in `reports/figures/` and copies them to `assets/img/`:
+The training script generates high-resolution diagnostic charts in `reports/figures/` and synchronizes them to `assets/img/`:
 
-### 1. Actual vs. Predicted Plots
-- Plots test set ground truth vs. model predictions along an ideal $y = x$ reference line.
+### 1. Actual vs. Predicted (Random Forest Champion)
+- Plots held-out test partition ground truth against model predictions along an ideal $y = x$ reference line.
 - For Random Forest, predictions tightly cluster along the diagonal between $\$100,000$ and $\$400,000$.
-- A horizontal flattening appears at the upper end ($\$500,000$) due to the census survey's cap at $5.0$.
+- The horizontal line at the upper end ($\$500,000$) reflects the census survey's right-censoring ceiling at $5.0$.
 
-### 2. Residual Distribution Plots
+<div align="center">
+  <img src="assets/img/actual_vs_predicted_random_forest.png" alt="Actual vs Predicted Random Forest" width="650" style="border-radius: 8px;"/>
+  <p><i>Figure 2: Actual vs. Predicted home values on held-out test data (Random Forest).</i></p>
+</div>
+
+### 2. Residual Distribution & Heteroscedasticity Analysis
 - Plots residuals ($y - \hat{y}$) against predicted values.
-- Centered symmetrically around zero with homoscedastic variance across most price ranges, showing that the non-linear tree ensembles effectively mitigate systematic bias.
+- Centered symmetrically around zero across typical price ranges, confirming the non-linear ensemble minimizes systematic model bias.
 
-### 3. Model Comparison Bar Chart
-- Displays CV RMSE and Test RMSE across all architectures side-by-side.
-- Clearly illustrates the progressive performance improvements from Baseline $\to$ Linear Regression $\to$ Gradient Boosting $\to$ Random Forest.
+<div align="center">
+  <img src="assets/img/residuals_vs_predicted_random_forest.png" alt="Residuals vs Predicted Random Forest" width="650" style="border-radius: 8px;"/>
+  <p><i>Figure 3: Residuals vs. Predicted values on test samples (Random Forest).</i></p>
+</div>
 
-### 4. Capturing Dashboard Screenshots
-To add a live dashboard screenshot:
-1. Start the app: `streamlit run app/streamlit_app.py`
-2. Navigate to the **Model Benchmark** or **Valuation Simulator** tab.
-3. Capture a screenshot (e.g., `Win + Shift + S` on Windows, or `Cmd + Shift + 4` on macOS).
-4. Save the image to `assets/img/dashboard_preview.png` and link it in the README.
+### 3. Feature Correlation Structure
+- Correlation analysis computed on census attributes reveals that **Median Household Income (`MedInc`)** has the strongest linear association ($r = 0.69$) with home valuation.
+
+<div align="center">
+  <img src="assets/img/correlation_heatmap.png" alt="Feature Correlation Heatmap" width="650" style="border-radius: 8px;"/>
+  <p><i>Figure 4: Pearson correlation heatmap across census features and median house value.</i></p>
+</div>
 
 ---
 
