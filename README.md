@@ -407,8 +407,8 @@ The training script generates high-resolution diagnostic charts saved locally to
 ## 👤 Author
 
 **Varun Ahuja**
-- GitHub: [@VarunNa3530J](https://github.com/VarunNa3530J)
-- Repository: [https://github.com/VarunNa3530J/LM-Model-Lab](https://github.com/VarunNa3530J/LM-Model-Lab)
+- GitHub: [@varunahuja70](https://github.com/varunahuja70)
+- Repository: [https://github.com/VarunNa3530J/LM-Model-Lab](https://github.com/varunahuja70/LM-Model-Lab)
 
 ---
 
