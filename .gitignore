@@ -1,17 +1,46 @@
+# Environments and Virtualenv
 .venv/
+env/
+venv/
+ENV/
+
+# Python byte-code and caches
 __pycache__/
 *.py[cod]
 *$py.class
-models/
-reports/figures/
-results/*.csv
-results/*.json
-results/*.txt
-!results/.gitkeep
-!reports/figures/.gitkeep
-!models/.gitkeep
+*.so
 .pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# OS specific files
 .DS_Store
+Thumbs.db
+
+# Packaging and distributions
 *.egg-info/
 dist/
 build/
+eggs/
+*.egg
+
+# Heavy serialized model weights (run `python -m mlmodellab.train` to generate locally)
+models/*.joblib
+!models/.gitkeep
+
+# Dataset downloads local cache
+data/
+scikit_learn_data/
+
+# Generated runtime logs and figures (kept reproducible via train.py)
+reports/figures/*.png
+!reports/figures/.gitkeep
+
+# Generated experiment runs & environment snapshots
+results/environment.txt
+results/experiments.csv
+results/experiments.json
+results/metrics.csv
+!results/metrics_template.csv
+!results/.gitkeep
