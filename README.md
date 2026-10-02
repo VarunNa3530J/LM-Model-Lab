@@ -50,7 +50,7 @@ Many machine learning projects demonstrate overly optimistic test scores due to 
 - **Encapsulated Preprocessing**: Preprocessors (`SimpleImputer`, `StandardScaler`) are coupled directly with regressors in pipeline objects to ensure no data leakage across folds.
 - **Multi-Model Benchmark**: Evaluates Baseline (`DummyRegressor`), Ordinary Least Squares (`LinearRegression`), `GradientBoostingRegressor`, and `RandomForestRegressor`.
 - **Deterministic 5-Fold Cross-Validation**: Cross-validation uses fixed seeds across all models with identical fold splits (`KFold(n_splits=5, shuffle=True, random_state=42)`).
-- **Automated Artifact Persistence**: Automatically serializes the best performing pipeline (`models/best_model.joblib`), audit metadata (`models/metadata.json`), metrics tables (`results/metrics.csv`), and environment lockfiles (`results/environment.txt`).
+- **Automated Artifact Persistence**: Automatically serializes the best performing pipeline (`models/best_model.joblib`), audit metadata (`models/metadata.json`), metrics tables (`results/metrics.csv`), and pip-freeze environment snapshots (`results/environment.txt`).
 - **Interactive Streamlit Dashboard**: Includes KPI summaries, comparative charts, diagnostic residual analysis, interactive single-sample property valuation, and run-by-run audit logs.
 - **Robust Inference Guardrails**: Prediction layer validates schema completeness, checks numeric validity, handles unit scaling ($\times 100,000$ USD), and flags out-of-distribution values against training extrema.
 - **Comprehensive Offline Test Suite**: 20 unit and integration tests covering data integrity, metric calculations, split invariance, leakage prevention, and model persistence without network calls.
